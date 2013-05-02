@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RingerOff</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="start">Start</string>
+    <string name="cancel">Cancel</string>
+    <string name="meeting_length">Choose a meeting length</string>
+
+    <string-array name="lengths">
+        <item>15 mins</item>
+        <item>30 mins</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+    </string-array>
+
+</resources>
