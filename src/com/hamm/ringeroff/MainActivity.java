@@ -1,6 +1,8 @@
 package com.hamm.ringeroff;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -34,9 +36,15 @@ public class MainActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> parent) {
 				itemSelected = 0;
 			}
-
 		});
+		currentVolume = getCurrentVolume();
 		getAudioManager().setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+
+		Intent intent = new Intent();
+		intent.setAction(CANCEL_ACTION);
+		PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent, 0);
+		AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+		alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 10000L, pi);
 	}
 
 	public void stop(View v) {
@@ -47,8 +55,7 @@ public class MainActivity extends Activity {
 	}
 
 	public int getCurrentVolume() {
-		AudioManager am = getAudioManager();
-		return am.getStreamVolume(AudioManager.STREAM_RING);
+		return getAudioManager().getStreamVolume(AudioManager.STREAM_RING);
 	}
 
 	public AudioManager getAudioManager() {
