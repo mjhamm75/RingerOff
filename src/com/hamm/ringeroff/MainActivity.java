@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 
 public class MainActivity extends Activity {
@@ -38,8 +40,17 @@ public class MainActivity extends Activity {
 				itemSelected = 0;
 			}
 		});
+
 		currentVolume = getCurrentVolume();
-		getAudioManager().setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+
+		CheckBox vibrate = (CheckBox) findViewById(R.id.checkboxVibrate);
+		if (vibrate.isChecked()) {
+			getAudioManager().setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+			System.out.println("VIBRATE");
+		} else {
+			getAudioManager().setRingerMode(AudioManager.RINGER_MODE_SILENT);
+			System.out.println("SILENT");
+		}
 
 		Intent intent = new Intent();
 		intent.setAction(CANCEL_ACTION);
