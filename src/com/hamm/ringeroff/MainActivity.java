@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 
 public class MainActivity extends Activity {
+	Context context = this;
 	AudioManager am;
 	int currentVolume;
 	int itemSelected = 0;
@@ -42,9 +43,9 @@ public class MainActivity extends Activity {
 
 		Intent intent = new Intent();
 		intent.setAction(CANCEL_ACTION);
-		PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent, 0);
+		PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
 		AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-		alarm.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 10000L, pi);
+		alarm.set(AlarmManager.RTC_WAKEUP, getMilliseconds(), pi);
 	}
 
 	public void stop(View v) {
@@ -63,5 +64,24 @@ public class MainActivity extends Activity {
 			am = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 		}
 		return am;
+	}
+
+	public Long getMilliseconds() {
+		Long currentTime = System.currentTimeMillis();
+		Long minutes;
+		switch (itemSelected) {
+		case 0:
+			minutes = 15L;
+		case 1:
+			minutes = 30L;
+		case 2:
+			minutes = 60L;
+		case 3:
+			minutes = 120L;
+		default:
+			minutes = 15L;
+		}
+		Long waitTime = minutes * 60000L;
+		return waitTime + currentTime;
 	}
 }
