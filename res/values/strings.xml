@@ -7,6 +7,7 @@
     <string name="start">Start</string>
     <string name="cancel">Cancel</string>
     <string name="meeting_length">Choose a meeting length</string>
+    <string name="checkbox_label">Vibrate when Silent</string>
 
     <string-array name="lengths">
         <item>15 mins</item>
